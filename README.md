@@ -1,4 +1,4 @@
 bro-js
 ======
 
-An implementation of bro pages in node.js. 
+An implementation of bro pages (http://bropages.org/) in node.js. 

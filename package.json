@@ -1,0 +1,46 @@
+{
+  "name": "bro",
+  "version": "0.0.0",
+  "description": "An implementation of bro pages for node",
+  "main": "lib/bro.js",
+  "bin": {
+    "bro": "bin/bro-cli.js"
+  },
+  "directories": {
+    "lib": "./lib",
+    "bin": "./bin"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nsand/bro-js.git"
+  },
+  "bugs": {
+    "url": "http://github.com/nsand/bro-js/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/nsand/bro-js/blob/master/LICENSE"
+    }
+  ],
+  "author": "nsand",
+  "readmeFilename": "README.md",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "nopt": "~2.1.2",
+    "npmlog": "~0.0.6",
+    "inquirer": "~0.2.4",
+    "chalk": ">=0.3.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-mocha-test": "~0.8.1"
+  }
+}
