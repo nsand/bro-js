@@ -1,6 +1,6 @@
 {
   "name": "bro-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An implementation of bro pages (http://bropages.org/) for node",
   "main": "lib/bro.js",
   "bin": {
