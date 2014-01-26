@@ -4,6 +4,7 @@
 var http = require('http');
 var bro = require('../lib/bro');
 var chalk = require('chalk');
+var state = require('../lib/state');
 
 var remaining = process.argv.slice(2);
 
@@ -36,8 +37,27 @@ var display = function(data) {
   console.log(chalk.underline(list.length + ' entr' + (list.length == 1 ? 'y' : 'ies') + ' for ' + remaining) + chalk.yellow(' -- submit your own example with "bro add '+ remaining +'"'));
   var i = 0;
   var isDefault = true;
+
+  // server argument for the command
+  var cmd = remaining.join('%20');
+
+  // the display string for the command
+  var cmd_display = remaining.join(' ');
+
+  state.reset();
+
+  // write to ~/.bro file with last command
+  var cmdObj = {};
+  cmdObj[cmd] = cmd_display;
+  state.write(cmdObj);
+
   list.forEach(function(entry) {
     i++;
+
+    var obj = {};
+    obj[i] = entry['id'];
+    state.write(obj);
+
     var body = entry.msg;
     body = body.replace(/^([^#]*)$/mg, function (match) { return chalk.magenta(match); });
 
