@@ -1,5 +1,5 @@
 {
-  "name": "bro",
+  "name": "bro-js",
   "version": "0.0.1",
   "description": "An implementation of bro pages (http://bropages.org/) for node",
   "main": "lib/bro.js",
@@ -26,7 +26,9 @@
       "url": "http://github.com/nsand/bro-js/blob/master/LICENSE"
     }
   ],
-  "author": "nsand",
+  "author": {
+    "name": "nsand"
+  },
   "readmeFilename": "README.md",
   "engines": {
     "node": ">=0.10.0"
