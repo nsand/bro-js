@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 'use strict';
-var http = require('http');
 var bro = require('../lib/bro');
 var chalk = require('chalk');
 var state = require('../lib/state');
+var request = require('request');
 
 var remaining = process.argv.slice(2);
 
@@ -12,22 +12,21 @@ if (remaining.length === 0) {
   console.log(chalk.red('Bro! Specify a command first!') + '\n\t* For example try ' + chalk.green('"bro curl"') + '\n\t* Use ' + chalk.yellow('"bro help"') + ' for more info');
 }
 else {
-  http.get(bro.URL + '/' + remaining.join('%20') + '.json', function(res) {
-    var data = '';
-    res.on('data', function(chunk) {
-      data += chunk;
-    });
-    res.on('end', function() {
-      try {
-        display(data);
-      }
-      catch (e) {
+  var action = remaining[0];
+  var action = bro.commands[action];
+  if (typeof action === 'function') {
+    action(remaining);
+  }
+  else {
+    request.get(bro.URL + '/' + remaining.join('%20') + '.json', function(error, res, body) {
+      if (error != null || res.statusCode === 404) {
         missingCommand(remaining.join(' '));
       }
+      else {
+        display(body);
+      }
     });
-  }).on('error', function(e) {
-    missingCommand(remaining.join(' '));
-  });
+  }
 }
 
 
@@ -48,7 +47,7 @@ var display = function(data) {
 
   // write to ~/.bro file with last command
   var cmdObj = {};
-  cmdObj[cmd] = cmd_display;
+  cmdObj['cmd'] = cmd_display;
   state.write(cmdObj);
 
   list.forEach(function(entry) {
@@ -78,9 +77,10 @@ var display = function(data) {
 
 };
 
+
 var missingCommand = function(cmd) {
   console.log('The ' + chalk.yellow(cmd) + ' command isn\'t in our database.');
   console.log('\t* Typing '+chalk.underline.green('"bro add"') +' will let you add ' + chalk.yellow(cmd) + ' to our database!');
   console.log('\t* There\'s nothing to lose by typing ' + chalk.underline.red('"bro add"') + ', it will just launch an editor with instructions.');
   console.log('\t* Need help? Visit ' + chalk.underline('"http://bropages.org/help"'));
-}
+};

@@ -38,7 +38,8 @@
     "nopt": "~2.1.2",
     "npmlog": "~0.0.6",
     "inquirer": "~0.2.4",
-    "chalk": ">=0.3.0"
+    "chalk": ">=0.3.0",
+    "request": "~2.33.0"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
