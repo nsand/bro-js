@@ -37,7 +37,8 @@
   "dependencies": {
     "inquirer": "~0.2.4",
     "chalk": ">=0.3.0",
-    "request": "~2.33.0"
+    "request": "~2.33.0",
+    "editor": "~0.0.6"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
